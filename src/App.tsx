@@ -3,6 +3,7 @@ import './App.css';
 import Button,{ButtonType, ButtonSize} from './components/Button/button';
 import Menu from './components/Menu/Menu';
 import MenuItem from "./components/Menu/MenuItem";
+import SubMenu from './components/Menu/subMenu';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Button btnType={ButtonType.Danger} size={ButtonSize.Large} >Hello</Button>
         <Button btnType={ButtonType.Link} size={ButtonSize.Small} href="http://www.baidu.com" >Hello</Button>
           <br/>
-          <Menu defaultIndex={0}>
+          <Menu defaultIndex={0} onSelect={(index) => {}}>
               <MenuItem>
                   link 1
               </MenuItem>
@@ -22,6 +23,11 @@ function App() {
               <MenuItem>
                   link 1
               </MenuItem>
+              <SubMenu title="sub">
+                  <MenuItem>dropdown1</MenuItem>
+                  <MenuItem>dropdown2</MenuItem>
+                  <MenuItem>dropdown3</MenuItem>
+              </SubMenu>
           </Menu>
       </header>
     </div>
