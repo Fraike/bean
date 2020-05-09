@@ -2,35 +2,41 @@ import React from "react";
 import { render, RenderResult, fireEvent, cleanup } from '@testing-library/react'
 import Menu, { MenuProps} from "./Menu";
 import MenuItem from "./MenuItem";
+import SubMenu from "./subMenu";
 
 const testProps: MenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     onSelect: jest.fn(),
     className: 'test'
 }
 
 const testVerProps: MenuProps = {
-    defaultIndex: 0,
+    defaultIndex: '0',
     mode: "vertical"
 }
 
 const generateMenu = (props: MenuProps) => {
     return (
         <Menu {...props}>
-            <MenuItem index={0}>
+            <MenuItem>
                 active
             </MenuItem>
-            <MenuItem index={1} disabled>
+            <MenuItem  disabled>
                 disabled
             </MenuItem>
-            <MenuItem index={2}>
+            <MenuItem>
                 link 1
             </MenuItem>
+            <SubMenu title="sub">
+                <MenuItem>dropdown1</MenuItem>
+                <MenuItem>dropdown2</MenuItem>
+                <MenuItem>dropdown3</MenuItem>
+            </SubMenu>
         </Menu>
     )
 }
 
-let wrapper:RenderResult, menuElement: HTMLElement, activeElement: HTMLElement, disabledElement: HTMLElement
+let wrapper:RenderResult, menuElement: HTMLElement, activeElement: HTMLElement, disabledElement: HTMLElement, subMenuElement: Element
 
 describe('test Menu Component', () => {
     beforeEach(()=>{
@@ -38,6 +44,7 @@ describe('test Menu Component', () => {
         menuElement = wrapper.getByTestId('test-menu')
         activeElement = wrapper.getByText('active')
         disabledElement = wrapper.getByText('disabled')
+        subMenuElement = wrapper.getByTestId('sub-menu')
     })
     it('should render correct menu and menuItem based on default props', () => {
         expect(menuElement).toBeInTheDocument()
@@ -62,5 +69,10 @@ describe('test Menu Component', () => {
         const wrapper = render(generateMenu(testVerProps))
         const menuElement = wrapper.getByTestId('test-menu')
         expect(menuElement).toHaveClass('menu-vertical')
+    });
+
+    it('should subMenu open success', function () {
+        fireEvent.touchMove(subMenuElement)
+        expect(subMenuElement).toHaveClass()
     });
 })

@@ -13,7 +13,7 @@ function App() {
         <Button btnType={ButtonType.Danger} size={ButtonSize.Large} >Hello</Button>
         <Button btnType={ButtonType.Link} size={ButtonSize.Small} href="http://www.baidu.com" >Hello</Button>
           <br/>
-          <Menu defaultIndex={0} onSelect={(index) => {}}>
+          <Menu defaultIndex={'0'} onSelect={(index) => {}} mode="vertical">
               <MenuItem>
                   link 1
               </MenuItem>
@@ -30,6 +30,7 @@ function App() {
               </SubMenu>
           </Menu>
       </header>
+        <dialog open>123</dialog>
     </div>
   );
 }
